@@ -1,0 +1,50 @@
+name: tests
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+env:
+  CI: true
+  NPM_VERSION: 6.x
+
+jobs:
+  test:
+    name: Node v${{ matrix.version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        version: [10.x, 12.x]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Node v${{ matrix.version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.version }}
+      - name: Get npm cache directory
+        id: getcache
+        shell: bash
+        run: echo "::set-output name=dir::$(npm config get cache)"
+      - name: Configure cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.getcache.outputs.dir }}
+          key: npm-${{ runner.os }}-${{matrix.version}}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: npm-${{ runner.os }}-${{matrix.version}}-
+      - name: Install dependencies
+        shell: bash
+        run: |
+          npm install --global npm@$NPM_VERSION
+          npm ci
+      - name: Check installed dependencies
+        shell: bash
+        run: npm ls
+      - name: Run tests
+        shell: bash
+        run: npm test -- --coverageReporters=lcov --verbose
