@@ -1,0 +1,25 @@
+{
+  "name": "ts-jest-actions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "prebuild": "rimraf lib/",
+    "build": "tsc --build src/ --verbose",
+    "test": "jest --coverage"
+  },
+  "author": "Griffin Yourick <gryphon92@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^26.0.3",
+    "@types/rimraf": "^3.0.0",
+    "jest": "^26.1.0",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.1.1",
+    "typescript": "^3.9.6"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  }
+}
