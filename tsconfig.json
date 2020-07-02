@@ -3,6 +3,7 @@
     "outDir": "./",
     "rootDir": "./",
     "composite": true,
+    "esModuleInterop": true,
     "resolveJsonModule": true
   },
   "files": ["package.json"]

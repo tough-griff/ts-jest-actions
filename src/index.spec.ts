@@ -9,7 +9,14 @@ beforeEach(() => {
 describe('.prefix()', () => {
   it('returns the correct text', () => {
     const result = subject.prefix('wow!');
-    expect(result).toMatch(/\w+ v[\d\.]+: wow\!/);
+    expect(result).toMatch(/\S+ v\S+: wow!/);
+  });
+});
+
+describe('.suffix()', () => {
+  it('returns the correct text', () => {
+    const result = subject.suffix('wow!');
+    expect(result).toMatch(/wow! \(.*\)/)
   });
 });
 

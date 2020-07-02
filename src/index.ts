@@ -1,3 +1,4 @@
+import config from 'config';
 import { name, version } from '../package.json';
 
 export class TestClass<T> {
@@ -11,6 +12,10 @@ export class TestClass<T> {
 
   prefix(text: string): string {
     return `${this._prefix}: ${text}`;
+  }
+
+  suffix(text: string): string {
+    return `${text} (${config.get('suffix')})`;
   }
 
   get(): T {

@@ -11,7 +11,11 @@
   },
   "author": "Griffin Yourick <gryphon92@gmail.com>",
   "license": "MIT",
+  "dependencies": {
+    "config": "^3.3.1"
+  },
   "devDependencies": {
+    "@types/config": "^0.0.36",
     "@types/jest": "^26.0.3",
     "@types/rimraf": "^3.0.0",
     "jest": "^26.1.0",
